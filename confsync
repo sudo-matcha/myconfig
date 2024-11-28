@@ -3,16 +3,26 @@ function copyconf {
 	name=$1
 	src=$2
 	dst=$3
+
+	# Look for config path
+	# If its not found, get out of there!
 	if [ ! -e $src ]; then
 		echo "\e[1;31mE\[e[0m: $name config not found"
-		exit
+		return 1
 	fi
+
+	# Looks like we're still here, copy the config
 	echo "Copying $name config to $dst..."
+	# if the destination isn't found, make a directory
+	# (this is kinda hacky and evil but i cant think of a better way rn :/)
 	if [ ! -e $dst ]; then
 		mkdir -p $dst
 	fi
+
+	# If the source is a directory, copy recursively and ignore git stuff
 	if [ -d $src ]; then
 		rsync -a -vv --exclude ".git*" $src $dst
+	# else, just copy it
 	elif [ -f $src ]; then
 		rsync -vv $src $dst
 	fi
@@ -20,11 +30,13 @@ function copyconf {
 	return 0
 }
 
+# Define config directories/paths
 kittyconf="$HOME/.config/kitty/kitty.conf"
 zshconf="$HOME/.zshrc"
 omzconf="$HOME/.oh-my-zsh/"
 p10kconf="$HOME/.p10k.zsh"
 
+# Copy them!
 copyconf "kitty" $kittyconf "./configs/kitty/"
 copyconf "zsh" $zshconf "./configs/zsh/"
 copyconf "oh-my-zsh" $omzconf "./configs/oh-my-zsh"
