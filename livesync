@@ -46,4 +46,4 @@ copyconf "p10k" $p10kconf "$HOME/Documents/Git/myconfig/configs/p10k/"
 copyconf "micro" $microconf "$HOME/Documents/Git/myconfig/configs/"
 copyconf "zoxide db" $zoxidedb "$HOME/Documents/Git/myconfig/configs/zoxide/"
 
-git add $HOME/Documents/Git/myconfig/configs && git commit -a -m "Synced @ $(date)" && git push
+git add $HOME/Documents/Git/myconfig/configs/* && git commit -a -m "Synced @ $(date)" && git push
