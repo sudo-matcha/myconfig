@@ -30,6 +30,8 @@ function copyconf {
 	return 0
 }
 
+gitdir="$HOME/Documents/Git/myconfig"
+
 # Define config directories/paths
 kittyconf="$HOME/.config/kitty/kitty.conf"
 zshconf="$HOME/.zshrc"
@@ -39,11 +41,11 @@ microconf="$HOME/.config/micro"
 zoxidedb="$HOME/.local/share/zoxide/db.zo"
 
 # Copy them!
-copyconf "kitty" $kittyconf "$HOME/Documents/Git/myconfig/configs/kitty/"
-copyconf "zsh" $zshconf "$HOME/Documents/Git/myconfig/configs/zsh/"
-copyconf "oh-my-zsh" $omzconf "$HOME/Documents/Git/myconfig/configs/oh-my-zsh"
-copyconf "p10k" $p10kconf "$HOME/Documents/Git/myconfig/configs/p10k/"
-copyconf "micro" $microconf "$HOME/Documents/Git/myconfig/configs/"
-copyconf "zoxide db" $zoxidedb "$HOME/Documents/Git/myconfig/configs/zoxide/"
+copyconf "kitty" $kittyconf "$gitdir/configs/kitty/"
+copyconf "zsh" $zshconf "$gitdir/configs/zsh/"
+copyconf "oh-my-zsh" $omzconf "$gitdir/configs/oh-my-zsh"
+copyconf "p10k" $p10kconf "$gitdir/configs/p10k/"
+copyconf "micro" $microconf "$gitdir/configs/"
+copyconf "zoxide db" $zoxidedb "$gitdir/configs/zoxide/"
 
-git add $HOME/Documents/Git/myconfig/configs/* && git commit -a -m "Synced @ $(date)" && git push
+git -C $gitdir add "$gitdir/configs/*" && git -C $gitdir commit -a -m "Synced @ $(date)" && git -C $gitdir push
