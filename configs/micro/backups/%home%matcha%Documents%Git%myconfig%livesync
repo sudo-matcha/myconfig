@@ -44,4 +44,4 @@ copyconf "oh-my-zsh" $omzconf "$HOME/Documents/Git/myconfig/configs/oh-my-zsh"
 copyconf "p10k" $p10kconf "$HOME/Documents/Git/myconfig/configs/p10k/"
 copyconf "micro" $microconf "$HOME/Documents/Git/myconfig/configs/"
 
-git add $HOME/Documents/Git/myconfig/* && git commit -a -m "Sync @ $(date)" && git push
+git add $HOME/Documents/Git/myconfig/configs && git commit -a -m "Synced @ $(date)" && git push
