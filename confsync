@@ -1,0 +1,31 @@
+#!/bin/bash
+function copyconf {
+	name=$1
+	src=$2
+	dst=$3
+	if [ ! -e $src ]; then
+		echo "\e[1;31mE\[e[0m: $name config not found"
+		exit
+	fi
+	echo "Copying $name config to $dst..."
+	if [ ! -e $dst ]; then
+		mkdir -p $dst
+	fi
+	if [ -d $src ]; then
+		rsync -a -vv --exclude ".git*" $src $dst
+	elif [ -f $src ]; then
+		rsync -vv $src $dst
+	fi
+	echo -e "Done!\n"
+	return 0
+}
+
+kittyconf="$HOME/.config/kitty/kitty.conf"
+zshconf="$HOME/.zshrc"
+omzconf="$HOME/.oh-my-zsh"
+p10kconf="$HOME/.p10k.zsh"
+
+copyconf "kitty" $kittyconf "./configs/kitty/"
+copyconf "zsh" $zshconf "./configs/zsh/"
+copyconf "oh-my-zsh" $omzconf "./configs/oh-my-zsh"
+copyconf "p10k" $p10kconf "./configs/p10k/"

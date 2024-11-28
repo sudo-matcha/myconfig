@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+# Setup kitty
+echo "Setting up kitty"
+## Check for existing installation
+which kitty > /dev/null
+if [ $? != 0 ]; then
+	echo -e "\e[1;31mE\e[0m: Kitty is not installed"
+	read -p "Install kitty? [Y/n] " conf
+	case "$conf" in
+	y|Y|"" ) sudo apt update && sudo apt install kitty;;
+	n|N ) exit 1;;
+	* ) echo "Invalid Option"; exit 1;;
+	esac
+else
+	echo -e "\e[1;34mI\e[0m: Kitty is installed"
+fi
