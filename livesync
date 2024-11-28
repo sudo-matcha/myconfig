@@ -36,6 +36,7 @@ zshconf="$HOME/.zshrc"
 omzconf="$HOME/.oh-my-zsh/"
 p10kconf="$HOME/.p10k.zsh"
 microconf="$HOME/.config/micro"
+zoxidedb="$HOME/.local/share/zoxide/db.zo"
 
 # Copy them!
 copyconf "kitty" $kittyconf "$HOME/Documents/Git/myconfig/configs/kitty/"
@@ -43,5 +44,6 @@ copyconf "zsh" $zshconf "$HOME/Documents/Git/myconfig/configs/zsh/"
 copyconf "oh-my-zsh" $omzconf "$HOME/Documents/Git/myconfig/configs/oh-my-zsh"
 copyconf "p10k" $p10kconf "$HOME/Documents/Git/myconfig/configs/p10k/"
 copyconf "micro" $microconf "$HOME/Documents/Git/myconfig/configs/"
+copyconf "zoxide db" $zoxidedb "$HOME/Documents/Git/myconfig/configs/zoxide/"
 
 git add $HOME/Documents/Git/myconfig/configs && git commit -a -m "Synced @ $(date)" && git push
