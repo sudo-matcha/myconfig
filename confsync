@@ -22,7 +22,7 @@ function copyconf {
 
 kittyconf="$HOME/.config/kitty/kitty.conf"
 zshconf="$HOME/.zshrc"
-omzconf="$HOME/.oh-my-zsh"
+omzconf="$HOME/.oh-my-zsh/"
 p10kconf="$HOME/.p10k.zsh"
 
 copyconf "kitty" $kittyconf "./configs/kitty/"
