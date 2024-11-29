@@ -84,7 +84,7 @@ case $1 in
 		if $dryrun; then
 			echo "Dryrun: adding \"$(dirname $gitdir)/*\", commiting with message \"Synced @ $(date)\", and pushing."
 		else
-			$(git --git-dir $gitdir add "$(dirname $gitdir)/*" && git --git-dir $gitdir commit -a -m "Synced @ $(date)" && git --git-dir $gitdir push) | tee -a "$gitdir/../sync.log"
+			git --git-dir $gitdir add "$(dirname $gitdir)/*" && git --git-dir $gitdir commit -a -m "Synced @ $(date)" && git --git-dir $gitdir push
 		fi
 		exit 0 ;;
 		
