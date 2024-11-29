@@ -50,6 +50,11 @@ function bincheck {
 
 # check for packages
 bincheck kitty micro zoxide zsh
+
+if [ -f "/home/$SUDO_USER/.zshrc" ]; then
+    echo 'eval "$(zoxide init --cmd cd zsh)"' >>  "/home/$SUDO_USER/.zshrc"
+fi
+
 bincheck --install-cmd "curl -fsSL lure.sh/install | bash" lure
 bincheck --install-cmd "sudo -u $SUDO_USER lure in hyfetch" hyfetch
 
@@ -79,5 +84,4 @@ if [ ! -f /home/$SUDO_USER/.p10k.zsh ]; then
 else
 	echo -e "\e[1;34mI\e[0m: powerlevel10k theme is already installed"
 fi
-
 
