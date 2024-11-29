@@ -88,7 +88,7 @@ case $1 in
 			git add *
 			git commit -a -m "Synced @ $(date)"
 			git push
-			cd -
+			cd - > /dev/null
 		fi
 		exit 0 ;;
 		
