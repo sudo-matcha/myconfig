@@ -82,7 +82,7 @@ case $1 in
 		copyconf "zoxide db" $zoxidedb "$gitdir/configs/zoxide/"
 		copyconf "hyfetch" $hyfetchconf "$gitdir/configs/hyfetch/"
 		if $dryrun; then
-			echo "Dryrun: adding $gitdir/../*, commiting with message \"Synced @ $(date)\", and pushing."
+			echo "Dryrun: adding \"$(dirname $gitdir)/*\", commiting with message \"Synced @ $(date)\", and pushing."
 		else
 			$(git --git-dir $gitdir add "$(dirname $gitdir)/*" && git --git-dir $gitdir commit -a -m "Synced @ $(date)" && git --git-dir $gitdir push) | tee -a $gitdir/../sync.log
 		fi
