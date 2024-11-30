@@ -62,6 +62,7 @@ function copyconf {
 
 # gitdir=$(readlink -f $0 | sed "s/\/livesync//")
 gitdir="$(dirname $(readlink -f $0))/.git"
+gitroot=$(dirname $gitdir)
 
 # Define config directories/paths
 kittyconf="$HOME/.config/kitty/kitty.conf"
@@ -74,7 +75,6 @@ hyfetchconf="$HOME/.config/hyfetch.json"
 
 case $1 in
 	"push")
-		gitroot=$(dirname $gitdir)
 		copyconf "kitty" $kittyconf "$gitroot/configs/kitty/"
 		copyconf "zsh" $zshconf "$gitroot/configs/zsh/"
 		copyconf "oh-my-zsh" $omzconf "$gitroot/configs/oh-my-zsh"
@@ -94,13 +94,13 @@ case $1 in
 		exit 0 ;;
 		
 	"pull")
-		copyconf "kitty" "$gitdir/configs/kitty/" $kittyconf
-		copyconf "zsh" "$gitdir/configs/zsh/" $zshconf
-		copyconf "oh-my-zsh" "$gitdir/configs/oh-my-zsh" $omzconf
-		copyconf "p10k" "$gitdir/configs/p10k/" $p10kconf
-		copyconf "micro" "$gitdir/configs/" $microconf
-		copyconf "zoxide db" "$gitdir/configs/zoxide/" $zoxidedb
-		copyconf "hyfetch" "$gitdir/configs/hyfetch/" $hyfetchconf
+		copyconf "kitty" "$gitroot/configs/kitty/" $(dirname $kittyconf)/
+		copyconf "zsh" "$gitroot/configs/zsh/.zshrc" $zshconf
+		copyconf "oh-my-zsh" "$gitroot/configs/oh-my-zsh/" $omzconf
+		copyconf "p10k" "$gitroot/configs/p10k/.p10k.zsh" $p10kconf
+		copyconf "micro" "$gitroot/configs/micro/" $microconf/
+		copyconf "zoxide db" "$gitroot/configs/zoxide/" $(dirname $zoxidedb)/
+		copyconf "hyfetch" "$gitroot/configs/hyfetch/" $hyfetchconf
 		exit 0 ;;
 
 	"")
