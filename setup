@@ -52,16 +52,19 @@ function bincheck {
 bincheck kitty micro zoxide zsh
 
 if [ -f "/home/$SUDO_USER/.zshrc" ]; then
-    read -p "Add zoxide init to .zshrc? [Y/n] " conf
-    case "$conf" in
-        y|Y|"" )
-             echo 'eval "$(zoxide init --cmd cd zsh)"' >>  "/home/$SUDO_USER/.zshrc" ;;
-        n|N ) :;;
-        * ) echo "Invalid Option"; exit 1;;
-    esac
+    if cat "/home/$SUDO_USER/.zshrc" | grep 'eval "$(zoxide init --cmd cd zsh)"' >> /dev/null; then
+        echo -e "\e[1;34mI\e[0m: zoxide init eval is already in ~/.zshrc"
+    else
+        read -p "Add zoxide init to .zshrc? [Y/n] " conf
+        case "$conf" in
+            y|Y|"" ) echo 'eval "$(zoxide init --cmd cd zsh)"' >> "/home/$SUDO_USER/.zshrc" ;;
+            n|N ) :;;
+            * ) echo "Invalid Option"; exit 1;;
+        esac
+    fi
 fi
 
-if [ $SHELL != $(which zsh) ]; then
+if [ $(getent passwd $SUDO_USER | cut -d: -f7) != $(which zsh) ]; then
     echo -e "\e[1;33mW\e[0m: zsh is not set as your login shell"
     read -p "Set $SUDO_USER's login shell to zsh? [Y/n] " conf
     case "$conf" in
