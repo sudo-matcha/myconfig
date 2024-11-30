@@ -83,7 +83,7 @@ if [ ! -d /home/$SUDO_USER/.oh-my-zsh ]; then
 	echo -e "\e[1;31mE\e[0m: oh-my-zsh is not installed"
 	read -p "Install oh-my-zsh? [Y/n] " conf
 	case "$conf" in
-	y|Y|"" ) sh -c "sudo -u $SUDO_USER $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" ;;
+	y|Y|"" ) sudo -u $SUDO_USER sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" ;;
 	n|N ) :;;
 	* ) echo "Invalid Option"; exit 1;;
 	esac
